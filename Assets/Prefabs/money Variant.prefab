@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100002, guid: 724e400c2f2f2418d8145bc542f9d950, type: 3}
       propertyPath: m_Name
-      value: money
+      value: money Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 724e400c2f2f2418d8145bc542f9d950, type: 3}
       propertyPath: m_RootOrder
