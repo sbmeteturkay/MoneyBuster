@@ -5,7 +5,7 @@ using UnityEngine;
 public class RenderQueue : MonoBehaviour
 {
     [SerializeField] int queue = 3000;
-    void Start()
+    private void OnEnable()
     {
         GetComponent<MeshRenderer>().material.renderQueue = queue;
     }

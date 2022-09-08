@@ -6,12 +6,14 @@ public class ObjectMove : MonoBehaviour
     [SerializeField] float yPosition = 0;
     [SerializeField] bool doRotate = false;
     [SerializeField] Vector3 pickUprotation;
+    [SerializeField] int objIndex=0;
     Camera main;
     Vector3 startPosition;
     Vector3 startRotation;
-    
+    public static int movingObjectIndex=0;
     private void Start()
     {
+        movingObjectIndex = 0;
         main = Camera.main;
         startPosition = transform.position;
         startRotation = transform.rotation.eulerAngles;
@@ -23,6 +25,7 @@ public class ObjectMove : MonoBehaviour
     private void OnMouseUp()
     {
         transform.DOMove(startPosition, 1);
+        movingObjectIndex = 0;
         if(doRotate)
             transform.DORotate(startRotation, 1);
     }
@@ -36,10 +39,17 @@ public class ObjectMove : MonoBehaviour
 
     private Vector3 Cast()
     {
+        movingObjectIndex = objIndex;
         Ray ray = main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, roomLayer))
             if (hit.collider != null)
                 return new Vector3(hit.point.x, yPosition, hit.point.z);
         return new Vector3(0, 0, 0);
+    }
+    private void OnDisable()
+    {
+        transform.DOMove(startPosition, 0);
+        if (doRotate)
+            transform.DORotate(startRotation, 0);
     }
 }
